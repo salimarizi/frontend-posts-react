@@ -1,13 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from './store'
+import { Provider } from 'react-redux'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+
+//pages
+import HomePage from './pages/Home';
+import BlogPage from './pages/Blog';
+import BlogCreatePage from './pages/Blog/Create';
+import AuthorPage from './pages/Author';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />}/>
+        <Route path="/posts/create" element={<BlogCreatePage />}/>
+        <Route path="/posts/:postId" element={<BlogPage />}/>
+        <Route path="/authors/:userId" element={<AuthorPage />}/>
+      </Routes>
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
